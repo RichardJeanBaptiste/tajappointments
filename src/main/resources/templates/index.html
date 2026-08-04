@@ -6,16 +6,41 @@
     <title>Login/Register</title>
 </head>
 <body>
-    <div>
+    <div style="display: flex; flex-direction: column">
         <h3>Login Form</h3>
 
-        <form>
-            <label html_for="login_username">Username: </label>
+        <form action="http://localhost:8080/login" method="post">
+            <label for="login_username">Username: </label>
             <input type="text" id="login_username" name="login_username"/>
+
+            <label for="login_password">Password: </label>
+            <input type="password" id="login_password" name="login_password"/>
+
+            <button type="submit">Submit</button>
         </form>
     </div>
 
-    <h3>Registration Form</h3>
-    <h3>Guest Form</h3>
+    <div>
+        <h3>Registration Form</h3>
+        <form action="http://localhost:8080/registration" method="post">
+            <label for="registration_username">Username: </label>
+            <input type="text" id="registration_username" name="registration_username"/>
+
+            <label for="registration_password">Password: </label>
+            <input type="password" id="registration_password" name="registration_password"/>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+
+    <div>
+        <h3>Guest Form</h3>
+        <form action="http://localhost:8080/guest" method="post">
+            <label for="guest_username">Username: </label>
+            <input type="text" name="guest_username" id="guest_username"/>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
 </body>
 </html>
