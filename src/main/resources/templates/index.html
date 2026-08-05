@@ -21,7 +21,7 @@
     </div>
 
     <div>
-        <h3>Registration Form</h3>
+        <h3>Business Registration Form</h3>
         <form action="http://localhost:8080/new/business" method="post">
             <label for="registration_username">Username: </label>
             <input type="text" id="registration_username" name="registration_username"/>
@@ -29,17 +29,31 @@
             <label for="registration_password">Password: </label>
             <input type="password" id="registration_password" name="registration_password"/>
 
-            <label for="account_type">Account Type</label>
-            <select name="account_type" id="account_type">
-                <option value="client">Client</option>
-                <option value="business">Business</option>
-            </select>
 
             <label for="registration_name">Name</label>
             <input type="text" name="registration_name" id="registration_name"/>
 
             <label for="registration_email">Email</label>
             <input type="email" name="registration_email" id="registration_email"/>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div>
+        <h3>Client Registration Form</h3>
+        <form action="http://localhost:8080/new/client" method="post">
+            <label for="client_username">Username: </label>
+            <input type="text" id="client_username" name="client_username"/>
+
+            <label for="client_password">Password: </label>
+            <input type="password" id="client_password" name="client_password"/>
+
+            <label for="client_name">Name</label>
+            <input type="text" name="client_name" id="client_name"/>
+
+            <label for="client_email">Email</label>
+            <input type="email" name="client_email" id="client_email"/>
 
             <button type="submit">Submit</button>
         </form>
