@@ -24,16 +24,17 @@
         <h3>Business Registration Form</h3>
         <form action="http://localhost:8080/new/business" method="post" style="display: flex; flex-direction: column; width: 20%">
 
-            <label for="registrationEmail">Email</label>
-            <input type="email" name="registrationEmail" id="registrationEmail"/>
+            <label for="businessEmail">Email: </label>
+            <input type="email" name="businessEmail" id="businessEmail"/>
 
-            <label for="registrationPassword">Password: </label>
-            <input type="password" id="registrationPassword" name="registrationPassword"/>
+            <label for="businessPassword">Password: </label>
+            <input type="password" id="businessPassword" name="businessPassword"/>
 
-            <label for="registrationName">Name</label>
-            <input type="text" name="registrationName" id="registrationName"/>
+            <label for="businessName">Name: </label>
+            <input type="text" name="businessName" id="businessName"/>
 
-
+            <label for="ownerName">Owner Name: </label>
+            <input type="text" id="ownerName" name="ownerName"/>
 
             <button type="submit">Submit</button>
         </form>
@@ -42,17 +43,16 @@
     <div>
         <h3>Client Registration Form</h3>
         <form action="http://localhost:8080/new/client" method="post" style="display: flex; flex-direction: column; width: 20%">
-            <label for="client_username">Username: </label>
-            <input type="text" id="client_username" name="client_username"/>
 
-            <label for="client_password">Password: </label>
-            <input type="password" id="client_password" name="client_password"/>
+            <label for="clientEmail">Email</label>
+            <input type="email" name="clientEmail" id="clientEmail"/>
 
-            <label for="client_name">Name</label>
-            <input type="text" name="client_name" id="client_name"/>
+            <label for="clientPassword">Password: </label>
+            <input type="password" id="clientPassword" name="clientPassword"/>
 
-            <label for="client_email">Email</label>
-            <input type="email" name="client_email" id="client_email"/>
+            <label for="clientName">Name</label>
+            <input type="text" name="clientName" id="clientName"/>
+
 
             <button type="submit">Submit</button>
         </form>
@@ -62,11 +62,12 @@
     <div>
         <h3>Guest Form</h3>
         <form action="http://localhost:8080/new/guest" method="post" style="display: flex; flex-direction: column; width: 20%">
-            <label for="guest_username">Username: </label>
-            <input type="text" name="guest_username" id="guest_username"/>
 
-            <label for="guest_email">Email:</label>
-            <input type="email" name="guest_email" id="guest_email"/>
+            <label for="guestEmail">Email:</label>
+            <input type="email" name="guestEmail" id="guestEmail"/>
+
+            <label for="guestName">Name: </label>
+            <input type="text" name="guestName" id="guestName"/>
             <button type="submit">Submit</button>
         </form>
     </div>

@@ -2,22 +2,22 @@ package com.example.tajappointments.GuestLogic;
 
 public class GuestForm {
 
-    private String guest_username;
-    private String guest_email;
+    private String guestEmail;
+    private String guestName;
 
-    public void setGuest_username(String guest_username){
-        this.guest_username = guest_username;
+    public void setGuestEmail(String guestEmail) {
+        this.guestEmail = guestEmail;
     }
 
-    public String getGuest_username() {
-        return guest_username;
+    public String getGuestEmail() {
+        return guestEmail;
     }
 
-    public void setGuest_email(String guest_email) {
-        this.guest_email = guest_email;
+    public void setGuestName(String guestName) {
+        this.guestName = guestName;
     }
 
-    public String getGuest_email() {
-        return guest_email;
+    public String getGuestName() {
+        return guestName;
     }
 }

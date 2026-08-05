@@ -1,8 +1,10 @@
 package com.example.tajappointments;
 
 import com.example.tajappointments.BusinessLogic.Business;
+import com.example.tajappointments.BusinessLogic.BusinessForm;
 import com.example.tajappointments.BusinessLogic.BusinessService;
 import com.example.tajappointments.ClientLogic.Client;
+import com.example.tajappointments.ClientLogic.ClientForm;
 import com.example.tajappointments.ClientLogic.ClientService;
 import com.example.tajappointments.GuestLogic.Guest;
 import com.example.tajappointments.GuestLogic.GuestForm;
@@ -52,16 +54,17 @@ public class LoginController {
 
 
     @PostMapping("/new/business")
-    public String newBusinessHandler(RegisterForm form) {
+    public String newBusinessHandler(BusinessForm form) {
 
-        String name = form.getRegistration_name();
-        String email = form.getRegistrationEmail();
+        String businessName = form.getBusinessName();
+        String email = form.getBusinessEmail();
+        String ownerName = form.getOwnerName();
 
         Business x = new Business();
 
-        x.setName(name);
+        x.setName(ownerName);
         x.setEmail(email);
-        x.setBusiness_name("Test Business");
+        x.setBusiness_name(businessName);
 
         businessService.create(x);
 
@@ -69,10 +72,10 @@ public class LoginController {
     }
 
     @PostMapping("/new/client")
-    public String newClientHandler(RegisterForm form) {
+    public String newClientHandler(ClientForm form) {
 
-        String name = form.getRegistration_name();
-        String email = form.getRegistrationEmail();
+        String name = form.getClientName();
+        String email = form.getClientEmail();
 
         Client x = new Client();
 
@@ -81,7 +84,7 @@ public class LoginController {
 
         clientService.create(x);
 
-        return "new business";
+        return "new client";
     }
 
 
@@ -89,12 +92,12 @@ public class LoginController {
     @PostMapping("/new/guest")
     public String guestHandler(GuestForm form) {
 
-        String username = form.getGuest_username();
-        String email = form.getGuest_email();
+        String email = form.getGuestEmail();
+        String name = form.getGuestName();
 
         Guest x = new Guest();
-        x.setName(username);
         x.setEmail(email);
+        x.setName(name);
 
         guestService.create(x);
 

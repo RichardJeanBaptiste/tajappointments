@@ -1,8 +1,13 @@
 package com.example.tajappointments.BusinessLogic;
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UuidGenerator;
+import org.hibernate.type.SqlTypes;
 
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -31,6 +36,26 @@ public class Business {
     private String name;
     private String email;
     private String business_name;
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(columnDefinition = "jsonb")
+    private List<String> clientList;
+
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(columnDefinition = "jsonb")
+    private List<String> availableDates;
+
+    public Business() {
+        this.clientList = new ArrayList<String>();
+        this.availableDates = new ArrayList<String>();
+    }
+
+    public String getAvailableDates() {
+        return availableDates.toString();
+    }
+
+    public String getClientList() {
+        return clientList.toString();
+    }
 
     public UUID getId() {
         return id;
