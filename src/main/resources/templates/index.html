@@ -22,12 +22,25 @@
 
     <div>
         <h3>Registration Form</h3>
-        <form action="http://localhost:8080/registration" method="post">
+        <form action="http://localhost:8080/new/business" method="post">
             <label for="registration_username">Username: </label>
             <input type="text" id="registration_username" name="registration_username"/>
 
             <label for="registration_password">Password: </label>
             <input type="password" id="registration_password" name="registration_password"/>
+
+            <label for="account_type">Account Type</label>
+            <select name="account_type" id="account_type">
+                <option value="client">Client</option>
+                <option value="business">Business</option>
+            </select>
+
+            <label for="registration_name">Name</label>
+            <input type="text" name="registration_name" id="registration_name"/>
+
+            <label for="registration_email">Email</label>
+            <input type="email" name="registration_email" id="registration_email"/>
+
             <button type="submit">Submit</button>
         </form>
     </div>
@@ -35,9 +48,12 @@
 
     <div>
         <h3>Guest Form</h3>
-        <form action="http://localhost:8080/guest" method="post">
+        <form action="http://localhost:8080/new/guest" method="post">
             <label for="guest_username">Username: </label>
             <input type="text" name="guest_username" id="guest_username"/>
+
+            <label for="guest_email">Email:</label>
+            <input type="email" name="guest_email" id="guest_email"/>
             <button type="submit">Submit</button>
         </form>
     </div>

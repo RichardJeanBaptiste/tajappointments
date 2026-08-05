@@ -1,10 +1,46 @@
 package com.example.tajappointments;
 
+import com.example.tajappointments.BusinessLogic.Business;
+import com.example.tajappointments.BusinessLogic.BusinessService;
+import com.example.tajappointments.ClientLogic.Client;
+import com.example.tajappointments.ClientLogic.ClientService;
+import com.example.tajappointments.GuestLogic.Guest;
+import com.example.tajappointments.GuestLogic.GuestForm;
+import com.example.tajappointments.GuestLogic.GuestService;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class LoginController {
+
+    private final BusinessService businessService;
+
+    private final ClientService clientService;
+
+    private final GuestService guestService;
+
+    public LoginController(BusinessService businessService, ClientService clientService, GuestService guestService) {
+
+        this.businessService = businessService;
+        this.clientService = clientService;
+        this.guestService = guestService;
+    }
+
+    @PostMapping("/business")
+    public Business create(@RequestBody Business business){
+        return businessService.create(business);
+    }
+
+    @PostMapping("/client")
+    public Client create(@RequestBody Client client){
+        return clientService.create(client);
+    }
+
+    @PostMapping("/guest")
+    public Guest create(@RequestBody Guest guest){
+        return guestService.create(guest);
+    }
 
     @PostMapping("/login")
     public String loginHandler(LoginForm form) {
@@ -18,56 +54,62 @@ public class LoginController {
     public String registrationHandler(RegisterForm form) {
         String username = form.getRegistration_username();
         String password = form.getRegistration_password();
+        String account_type = form.getAccount_type();
+        String name= form.getRegistration_name();
+        String email = form.getRegistration_email();
 
-        return username + " " + password;
+
+        return username + " " + password + " " + account_type + " " + name + " " + email;
     }
 
-    @PostMapping("/guest")
-    public void guestHandler() {
-        System.out.println("guest handler");
-    }
-}
+    @PostMapping("/new/business")
+    public String newBusinessHandler(RegisterForm form) {
 
-class LoginForm {
-    private String login_username;
-    private String login_password;
+        String name = form.getRegistration_name();
+        String email = form.getRegistration_email();
 
+        Business x = new Business();
 
-    public void setLogin_username(String login_username) {
-        this.login_username = login_username;
-    }
+        x.setName(name);
+        x.setEmail(email);
+        x.setBusiness_name("Test Business");
 
-    public String getLogin_username() {
-        return login_username;
+        businessService.create(x);
+
+        return "new business";
     }
 
-    public void setLogin_password(String login_password) {
-        this.login_password = login_password;
+    @PostMapping("/new/client")
+    public String newClientHandler(RegisterForm form) {
+
+        String name = form.getRegistration_name();
+        String email = form.getRegistration_email();
+
+        Client x = new Client();
+
+        x.setName(name);
+        x.setEmail(email);
+
+        clientService.create(x);
+
+        return "new business";
     }
 
-    public String getLogin_password() {
-        return login_password;
-    }
-}
 
-class RegisterForm {
-    private String registration_username;
-    private String registration_password;
 
-    public void setRegistration_username(String registration_username) {
-        this.registration_username = registration_username;
-    }
+    @PostMapping("/new/guest")
+    public String guestHandler(GuestForm form) {
 
-    public String getRegistration_username() {
-        return registration_username;
-    }
+        String username = form.getGuest_username();
+        String email = form.getGuest_email();
 
-    public void setRegistration_password(String registration_password){
-        this.registration_password = registration_password;
-    }
+        Guest x = new Guest();
+        x.setName(username);
+        x.setEmail(email);
 
-    public String getRegistration_password(){
-        return registration_password;
+        guestService.create(x);
+
+        return "new guest";
     }
 }
 
