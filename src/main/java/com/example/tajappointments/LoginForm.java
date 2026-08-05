@@ -1,23 +1,23 @@
 package com.example.tajappointments;
 
 public class LoginForm {
-    private String login_username;
-    private String login_password;
+    private String loginEmail;
+    private String loginPassword;
 
 
-    public void setLogin_username(String login_username) {
-        this.login_username = login_username;
+    public void setLoginEmail(String loginEmail) {
+        this.loginEmail = loginEmail;
     }
 
-    public String getLogin_username() {
-        return login_username;
+    public String getLoginEmail() {
+        return loginEmail;
     }
 
-    public void setLogin_password(String login_password) {
-        this.login_password = login_password;
+    public void setLoginPassword(String loginPassword) {
+        this.loginPassword = loginPassword;
     }
 
-    public String getLogin_password() {
-        return login_password;
+    public String getLoginPassword() {
+        return loginPassword;
     }
 }

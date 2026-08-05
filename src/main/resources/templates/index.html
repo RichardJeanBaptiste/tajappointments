@@ -9,12 +9,12 @@
     <div style="display: flex; flex-direction: column">
         <h3>Login Form</h3>
 
-        <form action="http://localhost:8080/login" method="post">
-            <label for="login_username">Username: </label>
-            <input type="text" id="login_username" name="login_username"/>
+        <form action="http://localhost:8080/login" method="post" style="display: flex; flex-direction: column; width: 20%">
+            <label for="loginEmail">Email: </label>
+            <input type="email" id="loginEmail" name="loginEmail"/>
 
-            <label for="login_password">Password: </label>
-            <input type="password" id="login_password" name="login_password"/>
+            <label for="loginPassword">Password: </label>
+            <input type="password" id="loginPassword" name="loginPassword"/>
 
             <button type="submit">Submit</button>
         </form>
@@ -22,19 +22,18 @@
 
     <div>
         <h3>Business Registration Form</h3>
-        <form action="http://localhost:8080/new/business" method="post">
-            <label for="registration_username">Username: </label>
-            <input type="text" id="registration_username" name="registration_username"/>
+        <form action="http://localhost:8080/new/business" method="post" style="display: flex; flex-direction: column; width: 20%">
 
-            <label for="registration_password">Password: </label>
-            <input type="password" id="registration_password" name="registration_password"/>
+            <label for="registrationEmail">Email</label>
+            <input type="email" name="registrationEmail" id="registrationEmail"/>
+
+            <label for="registrationPassword">Password: </label>
+            <input type="password" id="registrationPassword" name="registrationPassword"/>
+
+            <label for="registrationName">Name</label>
+            <input type="text" name="registrationName" id="registrationName"/>
 
 
-            <label for="registration_name">Name</label>
-            <input type="text" name="registration_name" id="registration_name"/>
-
-            <label for="registration_email">Email</label>
-            <input type="email" name="registration_email" id="registration_email"/>
 
             <button type="submit">Submit</button>
         </form>
@@ -42,7 +41,7 @@
 
     <div>
         <h3>Client Registration Form</h3>
-        <form action="http://localhost:8080/new/client" method="post">
+        <form action="http://localhost:8080/new/client" method="post" style="display: flex; flex-direction: column; width: 20%">
             <label for="client_username">Username: </label>
             <input type="text" id="client_username" name="client_username"/>
 
@@ -62,7 +61,7 @@
 
     <div>
         <h3>Guest Form</h3>
-        <form action="http://localhost:8080/new/guest" method="post">
+        <form action="http://localhost:8080/new/guest" method="post" style="display: flex; flex-direction: column; width: 20%">
             <label for="guest_username">Username: </label>
             <input type="text" name="guest_username" id="guest_username"/>
 

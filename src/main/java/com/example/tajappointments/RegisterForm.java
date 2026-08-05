@@ -1,49 +1,44 @@
 package com.example.tajappointments;
 
 public class RegisterForm {
-    private String registration_username;
-    private String registration_password;
-    private String account_type;
-    private String registration_name;
-    private String registration_email;
 
-    public void setRegistration_username(String registration_username) {
-        this.registration_username = registration_username;
+    private String registrationEmail;
+    private String registrationPassword;
+    private String registrationName;
+    private String businessName;
+
+
+    public void setRegistrationEmail(String registrationEmail) {
+        this.registrationEmail = registrationEmail;
     }
 
-    public String getRegistration_username() {
-        return registration_username;
+    public String getRegistrationEmail() {
+        return registrationEmail;
     }
 
-    public void setRegistration_password(String registration_password){
-        this.registration_password = registration_password;
+    public void setRegistrationPassword(String registrationPassword){
+        this.registrationPassword = registrationPassword;
     }
 
-    public String getRegistration_password(){
-        return registration_password;
+    public String getRegistrationPassword(){
+        return registrationPassword;
     }
 
-    public void setAccount_type(String account_type){
-        this.account_type = account_type;
+    public void setRegistrationName(String name) {
+        this.registrationName = name;
     }
 
-    public String getAccount_type() {
-        return account_type;
+    public String getRegistrationName() {
+        return registrationName;
     }
 
-    public void setRegistration_name(String name) {
-        this.registration_name = name;
+    public void setBusinessName(String businessName){
+        this.businessName = businessName;
     }
 
-    public String getRegistration_name() {
-        return registration_name;
+    public String getBusinessName() {
+        return businessName;
     }
 
-    public void setRegistration_email(String registration_email) {
-        this.registration_email = registration_email;
-    }
 
-    public String getRegistration_email() {
-        return registration_email;
-    }
 }

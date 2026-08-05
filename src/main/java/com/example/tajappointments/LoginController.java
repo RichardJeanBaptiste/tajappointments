@@ -45,28 +45,17 @@ public class LoginController {
     @PostMapping("/login")
     public String loginHandler(LoginForm form) {
 
-        String username = form.getLogin_username();
-        String password = form.getLogin_password();
-        return username + " " + password;
+        String email = form.getLoginEmail();
+        String password = form.getLoginPassword();
+        return email + " " + password;
     }
 
-    @PostMapping("/registration")
-    public String registrationHandler(RegisterForm form) {
-        String username = form.getRegistration_username();
-        String password = form.getRegistration_password();
-        String account_type = form.getAccount_type();
-        String name= form.getRegistration_name();
-        String email = form.getRegistration_email();
-
-
-        return username + " " + password + " " + account_type + " " + name + " " + email;
-    }
 
     @PostMapping("/new/business")
     public String newBusinessHandler(RegisterForm form) {
 
         String name = form.getRegistration_name();
-        String email = form.getRegistration_email();
+        String email = form.getRegistrationEmail();
 
         Business x = new Business();
 
@@ -83,7 +72,7 @@ public class LoginController {
     public String newClientHandler(RegisterForm form) {
 
         String name = form.getRegistration_name();
-        String email = form.getRegistration_email();
+        String email = form.getRegistrationEmail();
 
         Client x = new Client();
 
