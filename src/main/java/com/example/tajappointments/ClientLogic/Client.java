@@ -1,13 +1,20 @@
 package com.example.tajappointments.ClientLogic;
 import jakarta.persistence.*;
 import org.hibernate.annotations.UuidGenerator;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+
 import java.time.OffsetDateTime;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /*
 *   name
 *   email
 *   appointments
+*
 * */
 
 @Entity
@@ -24,6 +31,14 @@ public class Client {
 
     private String name;
     private String email;
+
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(columnDefinition = "jsonb")
+    private Map<String, List<String>> appointments;
+
+    public Client() {
+        this.appointments = new HashMap<String, List<String>>();
+    }
 
     public UUID getId() {
         return id;
@@ -47,5 +62,9 @@ public class Client {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getAppointments() {
+        return this.appointments.toString();
     }
 }

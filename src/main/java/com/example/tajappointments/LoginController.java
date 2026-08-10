@@ -49,7 +49,8 @@ public class LoginController {
 
         String email = form.getLoginEmail();
         String password = form.getLoginPassword();
-        return email + " " + password;
+        String account = form.getAccountType();
+        return email + " " + password + " " + account;
     }
 
 

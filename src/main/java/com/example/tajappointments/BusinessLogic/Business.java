@@ -1,14 +1,11 @@
 package com.example.tajappointments.BusinessLogic;
 import jakarta.persistence.*;
 import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UuidGenerator;
 import org.hibernate.type.SqlTypes;
 
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 
 /*
@@ -19,7 +16,8 @@ import java.util.UUID;
  * services
  * appointments
  * reviews
- * */
+ *
+ */
 
 @Entity
 @Table(name = "business")
@@ -36,6 +34,7 @@ public class Business {
     private String name;
     private String email;
     private String business_name;
+
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(columnDefinition = "jsonb")
     private List<String> clientList;
@@ -44,9 +43,24 @@ public class Business {
     @Column(columnDefinition = "jsonb")
     private List<String> availableDates;
 
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(columnDefinition = "jsonb")
+    private Map<String, List<String>> services;
+
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(columnDefinition = "jsonb")
+    private Map<String, List<String>> appointments;
+
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(columnDefinition = "jsonb")
+    private List<String> reviews;
+
     public Business() {
         this.clientList = new ArrayList<String>();
         this.availableDates = new ArrayList<String>();
+        this.services = new HashMap<String, List<String>>();
+        this.appointments = new HashMap<String, List<String>>();
+        this.reviews = new ArrayList<String>();
     }
 
     public String getAvailableDates() {
@@ -55,6 +69,18 @@ public class Business {
 
     public String getClientList() {
         return clientList.toString();
+    }
+
+    public String getServices() {
+        return services.toString();
+    }
+
+    public String getAppointments() {
+        return appointments.toString();
+    }
+
+    public String getReviews() {
+        return reviews.toString();
     }
 
     public UUID getId() {

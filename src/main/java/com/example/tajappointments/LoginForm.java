@@ -3,7 +3,7 @@ package com.example.tajappointments;
 public class LoginForm {
     private String loginEmail;
     private String loginPassword;
-
+    private String accountType;
 
     public void setLoginEmail(String loginEmail) {
         this.loginEmail = loginEmail;
@@ -19,5 +19,13 @@ public class LoginForm {
 
     public String getLoginPassword() {
         return loginPassword;
+    }
+
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
+    }
+
+    public String getAccountType() {
+        return accountType;
     }
 }
