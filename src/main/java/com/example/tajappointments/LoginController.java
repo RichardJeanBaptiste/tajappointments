@@ -12,7 +12,10 @@ import com.example.tajappointments.GuestLogic.GuestService;
 import com.example.tajappointments.UserLogic.User;
 import com.example.tajappointments.UserLogic.UserForm;
 import com.example.tajappointments.UserLogic.UserService;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,12 +31,15 @@ public class LoginController {
 
     private final UserService userService;
 
-    public LoginController(BusinessService businessService, ClientService clientService, GuestService guestService, UserService userService) {
+    private final AuthenticationManager authenticationManager;
+
+    public LoginController(BusinessService businessService, ClientService clientService, GuestService guestService, UserService userService, AuthenticationManager authenticationManager) {
 
         this.businessService = businessService;
         this.clientService = clientService;
         this.guestService = guestService;
         this.userService = userService;
+        this.authenticationManager = authenticationManager;
     }
 
     @PostMapping("/business")
@@ -58,13 +64,26 @@ public class LoginController {
 
 
 
-    @PostMapping("/login")
+    @PostMapping("/api/auth/login")
     public String loginHandler(LoginForm form) {
 
         String email = form.getLoginEmail();
         String password = form.getLoginPassword();
-        String account = form.getAccountType();
-        return email + " " + password + " " + account;
+
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            email,
+                            password
+                    )
+            );
+            return "Login successful";
+        } catch (AuthenticationException e) {
+            System.out.println(e);
+            return "Username or Password failed";
+
+        }
+
     }
 
     @PostMapping("/api/auth/register")
@@ -80,7 +99,7 @@ public class LoginController {
 
         userService.create(x);
 
-        return form.getUserEmail() + " -- " + form.getUserPassword();
+        return "User Registered";
     }
 
     @PostMapping("/new/business")
