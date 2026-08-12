@@ -2,6 +2,7 @@ package com.example.tajappointments;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -23,6 +24,8 @@ public class SecurityConfig {
 
                 .cors(Customizer.withDefaults())
 
+
+
                 .authorizeHttpRequests(auth -> auth
 
                         // Public authentication endpoints
@@ -32,9 +35,12 @@ public class SecurityConfig {
                                 "/new/user"
                         ).permitAll()
 
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         // Everything else requires authentication
                         .anyRequest().authenticated()
                 )
+
+
 
                 .logout(logout -> logout
                         .logoutUrl("/api/auth/logout")

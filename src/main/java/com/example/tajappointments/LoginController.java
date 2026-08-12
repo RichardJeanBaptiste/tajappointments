@@ -63,10 +63,10 @@ public class LoginController {
         return userService.create(user);
     }
 
-
-    @CrossOrigin(origins = "http://localhost:5173")
+    
     @PostMapping("/api/auth/login")
     public String loginHandler(@RequestBody LoginForm form) {
+
 
         String email = form.getLoginEmail();
         String password = form.getLoginPassword();
@@ -80,9 +80,7 @@ public class LoginController {
             );
             return "Login successful";
         } catch (AuthenticationException e) {
-            System.out.println(e);
             return "Username or Password failed";
-
         }
     }
 

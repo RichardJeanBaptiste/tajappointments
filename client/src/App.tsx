@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Button, Form,  } from 'react-bootstrap';
 import './App.css'
+import * as React from "react";
 
 function App() {
   
@@ -19,18 +20,25 @@ function App() {
       }));
   }
 
-  const handleLoginSubmit = (e) => {
-    console.log(loginForm);
+  const handleLoginSubmit = async (e: any) => {
+    //console.log(loginForm);
     
     e.preventDefault();
-    
-    fetch("http://localhost:8080/auth/login", {
-      method: 'POST',
-      body: JSON.stringify(loginForm)
-    }).then((response) => response.body)
-    .then((data) => {
-      console.log(data);
-    })
+
+      const response = await fetch("http://localhost:8080/api/auth/login", {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+              loginEmail: loginForm.email,
+              loginPassword: loginForm.password
+          })
+      });
+
+      const message = await response.text();
+
+      console.log(message);
   }
 
   return (
