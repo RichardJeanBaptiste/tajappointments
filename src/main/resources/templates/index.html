@@ -10,6 +10,13 @@
         <h3>Login Form</h3>
 
         <form action="http://localhost:8080/login" method="post" style="display: flex; flex-direction: column; width: 20%">
+
+            <label for="accountType">Account: </label>
+            <select id="accountType" name="accountType">
+                <option value="business">Business</option>
+                <option value="client">Client</option>
+            </select>
+
             <label for="loginEmail">Email: </label>
             <input type="email" id="loginEmail" name="loginEmail"/>
 

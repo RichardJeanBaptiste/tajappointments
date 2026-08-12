@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Registration Page</title>
+</head>
+<body>
+    <div>
+        <h3>Registration Form</h3>
+        <form action="http://localhost:8080/new/user" method="post"
+              style="display: flex; flex-direction: column; width: 20%">
+
+            <label for="userEmail">Email: </label>
+            <input type="email" name="userEmail" id="userEmail"/>
+
+            <label for="userPassword">Password: </label>
+            <input type="password" id="userPassword" name="userPassword"/>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+
+    <div>
+        <h3>Guest Form</h3>
+        <form action="http://localhost:8080/new/guest" method="post"
+              style="display: flex; flex-direction: column; width: 20%">
+
+            <label for="guestEmail">Email:</label>
+            <input type="email" name="guestEmail" id="guestEmail"/>
+
+            <label for="guestName">Name: </label>
+            <input type="text" name="guestName" id="guestName"/>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+</body>
+</html>

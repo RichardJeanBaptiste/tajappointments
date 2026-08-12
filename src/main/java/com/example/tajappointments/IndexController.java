@@ -12,4 +12,14 @@ public class IndexController {
     public ModelAndView index(){
         return new ModelAndView("index");
     }
+
+    @GetMapping("/login")
+    public ModelAndView loginPage() {
+        return new ModelAndView("login");
+    }
+
+    @GetMapping("/registration")
+    public ModelAndView registerPage() {
+        return new ModelAndView("register");
+    }
 }

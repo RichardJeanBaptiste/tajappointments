@@ -9,6 +9,10 @@ import com.example.tajappointments.ClientLogic.ClientService;
 import com.example.tajappointments.GuestLogic.Guest;
 import com.example.tajappointments.GuestLogic.GuestForm;
 import com.example.tajappointments.GuestLogic.GuestService;
+import com.example.tajappointments.UserLogic.User;
+import com.example.tajappointments.UserLogic.UserForm;
+import com.example.tajappointments.UserLogic.UserService;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,11 +26,14 @@ public class LoginController {
 
     private final GuestService guestService;
 
-    public LoginController(BusinessService businessService, ClientService clientService, GuestService guestService) {
+    private final UserService userService;
+
+    public LoginController(BusinessService businessService, ClientService clientService, GuestService guestService, UserService userService) {
 
         this.businessService = businessService;
         this.clientService = clientService;
         this.guestService = guestService;
+        this.userService = userService;
     }
 
     @PostMapping("/business")
@@ -44,6 +51,13 @@ public class LoginController {
         return guestService.create(guest);
     }
 
+    @PostMapping("/user")
+    public User create(@RequestBody User user) {
+        return userService.create(user);
+    }
+
+
+
     @PostMapping("/login")
     public String loginHandler(LoginForm form) {
 
@@ -53,6 +67,21 @@ public class LoginController {
         return email + " " + password + " " + account;
     }
 
+    @PostMapping("/api/auth/register")
+    public String userHandler(UserForm form){
+
+        String email = form.getUserEmail();
+        String password = form.getUserPassword();
+
+        User x = new User();
+
+        x.setEmail(email);
+        x.setPassword(password);
+
+        userService.create(x);
+
+        return form.getUserEmail() + " -- " + form.getUserPassword();
+    }
 
     @PostMapping("/new/business")
     public String newBusinessHandler(BusinessForm form) {
