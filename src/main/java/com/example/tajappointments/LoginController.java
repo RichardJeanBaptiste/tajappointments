@@ -16,6 +16,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -63,9 +64,9 @@ public class LoginController {
     }
 
 
-
+    @CrossOrigin(origins = "http://localhost:5173")
     @PostMapping("/api/auth/login")
-    public String loginHandler(LoginForm form) {
+    public String loginHandler(@RequestBody LoginForm form) {
 
         String email = form.getLoginEmail();
         String password = form.getLoginPassword();
@@ -83,7 +84,6 @@ public class LoginController {
             return "Username or Password failed";
 
         }
-
     }
 
     @PostMapping("/api/auth/register")
