@@ -63,7 +63,7 @@ public class LoginController {
         return userService.create(user);
     }
 
-    
+
     @PostMapping("/api/auth/login")
     public String loginHandler(@RequestBody LoginForm form) {
 
@@ -85,7 +85,7 @@ public class LoginController {
     }
 
     @PostMapping("/api/auth/register")
-    public String userHandler(UserForm form){
+    public String userHandler(@RequestBody UserForm form){
 
         String email = form.getUserEmail();
         String password = form.getUserPassword();
