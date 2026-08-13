@@ -16,10 +16,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class LoginController {
@@ -43,10 +40,7 @@ public class LoginController {
         this.authenticationManager = authenticationManager;
     }
 
-    @PostMapping("/business")
-    public Business create(@RequestBody Business business){
-        return businessService.create(business);
-    }
+
 
     @PostMapping("/client")
     public Client create(@RequestBody Client client){
@@ -89,34 +83,20 @@ public class LoginController {
 
         String email = form.getUserEmail();
         String password = form.getUserPassword();
+        String role = form.getRole();
 
         User x = new User();
 
         x.setEmail(email);
         x.setPassword(password);
+        x.setRole(role);
 
         userService.create(x);
 
         return "User Registered";
     }
 
-    @PostMapping("/new/business")
-    public String newBusinessHandler(BusinessForm form) {
 
-        String businessName = form.getBusinessName();
-        String email = form.getBusinessEmail();
-        String ownerName = form.getOwnerName();
-
-        Business x = new Business();
-
-        x.setName(ownerName);
-        x.setEmail(email);
-        x.setBusiness_name(businessName);
-
-        businessService.create(x);
-
-        return "new business";
-    }
 
     @PostMapping("/new/client")
     public String newClientHandler(ClientForm form) {

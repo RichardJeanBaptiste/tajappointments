@@ -6,6 +6,7 @@ public class BusinessForm {
     private String businessPassword;
     private String businessName;
     private String ownerName;
+    private String ownerId;
 
     public void setBusinessEmail(String businessEmail){
         this.businessEmail = businessEmail;
@@ -39,4 +40,11 @@ public class BusinessForm {
         return ownerName;
     }
 
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
+    }
+
+    public String getOwnerId() {
+        return ownerId;
+    }
 }

@@ -34,6 +34,7 @@ public class Business {
     private String name;
     private String email;
     private String business_name;
+    private String ownerId;
 
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(columnDefinition = "jsonb")
@@ -113,6 +114,14 @@ public class Business {
 
     public String getBusiness_name() {
         return business_name;
+    }
+
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
+    }
+
+    public String getOwnerId() {
+        return ownerId;
     }
 
 }

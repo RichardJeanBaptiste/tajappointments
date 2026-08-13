@@ -24,15 +24,17 @@ public class SecurityConfig {
 
                 .cors(Customizer.withDefaults())
 
-
-
                 .authorizeHttpRequests(auth -> auth
 
                         // Public authentication endpoints
                         .requestMatchers(
                                 "/api/auth/login",
                                 "/api/auth/register",
-                                "/new/user"
+                                "/new/user",
+
+                                /* Remove Routes in Production*/
+                                "/api/new/business",
+                                "/api/new/service"
                         ).permitAll()
 
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
