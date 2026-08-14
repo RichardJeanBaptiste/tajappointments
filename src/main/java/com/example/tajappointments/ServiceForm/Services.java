@@ -35,6 +35,10 @@ public class Services {
     private String description;
     private String businessId;
 
+    public UUID getId() {
+        return id;
+    }
+
     public OffsetDateTime getCreatedAt() {
         return createdAt;
     }

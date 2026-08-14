@@ -46,7 +46,7 @@ public class Business {
 
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(columnDefinition = "jsonb")
-    private Map<String, List<String>> services;
+    private List<UUID> services;
 
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(columnDefinition = "jsonb")
@@ -59,7 +59,7 @@ public class Business {
     public Business() {
         this.clientList = new ArrayList<String>();
         this.availableDates = new ArrayList<String>();
-        this.services = new HashMap<String, List<String>>();
+        this.services = new ArrayList<UUID>();
         this.appointments = new HashMap<String, List<String>>();
         this.reviews = new ArrayList<String>();
     }
@@ -72,9 +72,14 @@ public class Business {
         return clientList.toString();
     }
 
-    public String getServices() {
-        return services.toString();
+    public List<UUID> getServices() {
+
+        return services;
     }
+
+//    public void addToServices(UUID serviceToAdd) {
+//        this.services.add(serviceToAdd);
+//    }
 
     public String getAppointments() {
         return appointments.toString();
@@ -123,5 +128,7 @@ public class Business {
     public String getOwnerId() {
         return ownerId;
     }
+
+
 
 }
