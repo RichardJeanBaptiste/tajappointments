@@ -1,11 +1,14 @@
 package com.example.tajappointments.ServiceForm;
 
+import java.util.UUID;
+
 public class ServicesForm {
 
     private String serviceName;
     private String serviceCost;
     private String serviceDuration;
     private String serviceDescription;
+    private String serviceQuery;
     private String businessId;
 
 
@@ -39,6 +42,14 @@ public class ServicesForm {
 
     public String getServiceDescription() {
         return serviceDescription;
+    }
+
+    public void setServiceQuery(String serviceQuery){
+        this.serviceQuery = serviceQuery;
+    }
+
+    public String getServiceQuery() {
+        return serviceQuery;
     }
 
     public void setBusinessId(String businessId) {

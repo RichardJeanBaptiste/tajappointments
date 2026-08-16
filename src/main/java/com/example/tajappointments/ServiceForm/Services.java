@@ -34,6 +34,11 @@ public class Services {
     private String duration;
     private String description;
     private String businessId;
+    private boolean availability;
+
+    public Services() {
+        this.availability = true;
+    }
 
     public UUID getId() {
         return id;
@@ -82,4 +87,13 @@ public class Services {
     public String getBusinessId() {
         return businessId;
     }
+
+    public void setAvailability(boolean availability) {
+        this.availability = availability;
+    }
+
+    public boolean getAvailability() {
+        return availability;
+    }
+
 }

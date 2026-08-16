@@ -73,13 +73,8 @@ public class Business {
     }
 
     public List<UUID> getServices() {
-
         return services;
     }
-
-//    public void addToServices(UUID serviceToAdd) {
-//        this.services.add(serviceToAdd);
-//    }
 
     public String getAppointments() {
         return appointments.toString();

@@ -56,7 +56,7 @@ public class BusinessController {
         String serviceCost = form.getServiceCost();
         String serviceDuration = form.getServiceDuration();
         String businessId = form.getBusinessId();
-        
+
 
         try {
 
@@ -75,6 +75,24 @@ public class BusinessController {
         } catch (Exception e) {
             System.out.println(e.toString());
             return "Failed To Create New Service";
+        }
+    }
+
+    @PostMapping("/api/remove/service")
+    public String removeService(@RequestBody ServicesForm form) {
+
+        String serviceQuery = form.getServiceQuery();
+        String businessId = form.getBusinessId();
+
+        try {
+
+            businessService.removeServicesById(UUID.fromString(businessId), UUID.fromString(serviceQuery));
+            servicesService.removeById(UUID.fromString(serviceQuery));
+
+            return "Service Removed";
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }

@@ -23,12 +23,39 @@ public class BusinessService {
 
     public void addToServicesById(UUID businessId, UUID serviceId) {
 
-        Business business = businessRepository.findById(businessId)
-                .orElseThrow(() -> new RuntimeException("Business not found"));
-
+        Business business = findById(businessId);
 
         business.getServices().add(serviceId);
 
         businessRepository.save(business);
     }
+
+    public void removeServicesById(UUID businessId, UUID serviceId) {
+
+        Business business = findById(businessId);
+
+        business.getServices().remove(serviceId);
+
+        businessRepository.save(business);
+    }
+
+
+    public void changeNameById(UUID businessId, String newName) {
+
+        Business business = findById(businessId);
+
+        business.setName(newName);
+
+        businessRepository.save(business);
+    }
+
+    public void changeEmailById(UUID businessId, String email) {
+
+        Business business = findById(businessId);
+
+        business.setName(email);
+
+        businessRepository.save(business);
+    }
+
 }
