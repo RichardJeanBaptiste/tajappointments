@@ -1,6 +1,8 @@
 package com.example.tajappointments.BusinessLogic;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
 @Service
@@ -21,11 +23,51 @@ public class BusinessService {
                 .orElseThrow(() -> new RuntimeException("Business not found"));
     }
 
-    public void addToServicesById(UUID businessId, UUID serviceId) {
+    public void editFields(UUID businessId, HashMap<String, String> fields) {
 
         Business business = findById(businessId);
 
-        business.getServices().add(serviceId);
+        for (String field : fields.keySet()) {
+
+            String currentValue = fields.get(field);
+
+           switch(field) {
+               case "name":
+                    if (!currentValue.isEmpty()) {
+                        business.setName(currentValue);
+                    }
+                    break;
+               case "email":
+                    if (!currentValue.isEmpty()) {
+                        business.setEmail(currentValue);
+                    }
+                   break;
+               case "address":
+                   if(!currentValue.isEmpty()) {
+                       business.setAddress(currentValue);
+                   }
+                   break;
+               case "business_name":
+                   if(!currentValue.isEmpty()){
+                       business.setBusinessName(currentValue);
+                   }
+               default:
+                   break;
+           }
+        }
+
+        businessRepository.save(business);
+    }
+
+    public void addToServicesById(UUID businessId, ArrayList<UUID> serviceIds) {
+
+        Business business = findById(businessId);
+
+
+        for (UUID service: serviceIds) {
+            business.getServices().add(service);
+        }
+
 
         businessRepository.save(business);
     }

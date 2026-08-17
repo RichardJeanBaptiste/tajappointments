@@ -40,7 +40,7 @@ public class BusinessController {
 
         x.setName(ownerName);
         x.setEmail(email);
-        x.setBusiness_name(businessName);
+        x.setBusinessName(businessName);
         x.setOwnerId(ownerId);
 
         businessService.create(x);
@@ -49,27 +49,54 @@ public class BusinessController {
     }
 
     @PostMapping("/api/edit/business")
-    public String editBusiness() {
+    public String editBusiness(@RequestBody BusinessForm form) {
+
+        UUID id = UUID.fromString(form.getBusinessId());
+        String name = (form.getOwnerName() == null) ? "" : form.getOwnerName();
+        String email = (form.getBusinessEmail() == null) ? "" : form.getBusinessEmail();
+        String address = (form.getBusinessAddress() == null) ? "" : form.getBusinessAddress();
+
+        HashMap<String, String> fields = new HashMap<String, String>(
+                Map.of(
+                "name", name,
+                "email", email,
+                "address", address
+        ));
+
+        businessService.editFields(id, fields);
+
         return "Business Edited";
     }
 
     @PostMapping("/api/new/service")
     public String newService(@RequestBody ServicesForm[] form) {
 
+        ArrayList<UUID> serviceIds = new ArrayList<>();
+        List<Services> newServices = new ArrayList<>();
+
+        // Test - ID -> get userId from path
+        UUID businessId = UUID.fromString("09c695e6-bc71-4ffd-94bd-6f450bf128b5");
+
         try {
 
             for(ServicesForm currentService : form){
                 Services newService = new Services();
 
+                UUID newId = UUID.randomUUID();
+
+                newService.setId(newId);
                 newService.setName(currentService.getServiceName());
                 newService.setDescription(currentService.getServiceDescription());
                 newService.setDuration(currentService.getServiceDuration());
                 newService.setCost(currentService.getServiceCost());
-                newService.setBusinessId(currentService.getBusinessId());
+                newService.setBusinessId(String.valueOf(businessId));
 
-                servicesService.create(newService);
-                businessService.addToServicesById(UUID.fromString(currentService.getBusinessId()) , newService.getId());
+                newServices.add(newService);
+                serviceIds.add(newId);
             }
+
+            servicesService.addMultipleServices(newServices);
+            businessService.addToServicesById(businessId, serviceIds);
 
             return "Services Array";
 

@@ -3,6 +3,9 @@ package com.example.tajappointments.ServiceForm;
 
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -28,5 +31,14 @@ public class ServicesService {
         Services service = findById(id);
 
         servicesRepository.delete(service);
+    }
+
+    public void addMultipleServices(List<Services> services) {
+
+        List<Services> newServices = new ArrayList<>();
+
+        newServices.addAll(services);
+
+        servicesRepository.saveAll(newServices);
     }
 }

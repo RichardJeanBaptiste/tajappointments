@@ -35,7 +35,8 @@ public class SecurityConfig {
                                 /* Remove Routes in Production*/
                                 "/api/new/business",
                                 "/api/new/service",
-                                "/api/remove/service"
+                                "/api/remove/service",
+                                "/api/edit/business"
                         ).permitAll()
 
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()

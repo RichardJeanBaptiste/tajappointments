@@ -22,8 +22,6 @@ import java.util.UUID;
 public class Services {
 
     @Id
-    @GeneratedValue
-    @UuidGenerator
     private UUID id;
 
     @Column(name = "created_at", insertable = false, updatable = false)
@@ -38,6 +36,10 @@ public class Services {
 
     public Services() {
         this.availability = true;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public UUID getId() {
