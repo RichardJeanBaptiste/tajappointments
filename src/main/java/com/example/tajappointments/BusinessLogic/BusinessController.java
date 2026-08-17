@@ -49,34 +49,31 @@ public class BusinessController {
     }
 
     @PostMapping("/api/new/service")
-    public String newService(@RequestBody ServicesForm form) {
-
-        String serviceName = form.getServiceName();
-        String serviceDescription = form.getServiceDescription();
-        String serviceCost = form.getServiceCost();
-        String serviceDuration = form.getServiceDuration();
-        String businessId = form.getBusinessId();
-
+    public String newService(@RequestBody ServicesForm[] form) {
 
         try {
 
-            Services newService = new Services();
+            for(ServicesForm currentService : form){
+                Services newService = new Services();
 
-            newService.setName(serviceName);
-            newService.setDescription(serviceDescription);
-            newService.setCost(serviceCost);
-            newService.setDuration(serviceDuration);
-            newService.setBusinessId(businessId);
+                newService.setName(currentService.getServiceName());
+                newService.setDescription(currentService.getServiceDescription());
+                newService.setDuration(currentService.getServiceDuration());
+                newService.setCost(currentService.getServiceCost());
+                newService.setBusinessId(currentService.getBusinessId());
 
-            servicesService.create(newService);
-            businessService.addToServicesById(UUID.fromString(businessId), newService.getId());
+                servicesService.create(newService);
+                businessService.addToServicesById(UUID.fromString(currentService.getBusinessId()) , newService.getId());
+            }
 
-            return "Service Created " + newService.getId() ;
+            return "Services Array";
+
         } catch (Exception e) {
-            System.out.println(e.toString());
-            return "Failed To Create New Service";
+            throw new RuntimeException(e);
         }
+
     }
+
 
     @PostMapping("/api/remove/service")
     public String removeService(@RequestBody ServicesForm form) {
@@ -95,4 +92,7 @@ public class BusinessController {
             throw new RuntimeException(e);
         }
     }
+
+//    @PostMapping("/api/edit/service")
+//    public String editService(@RequestBody )
 }
