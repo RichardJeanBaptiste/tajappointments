@@ -34,6 +34,7 @@ public class Business {
     private String name;
     private String email;
     private String business_name;
+    private String address;
     private String ownerId;
 
     @JdbcTypeCode(SqlTypes.JSON)
@@ -62,6 +63,7 @@ public class Business {
         this.services = new ArrayList<UUID>();
         this.appointments = new HashMap<String, List<String>>();
         this.reviews = new ArrayList<String>();
+        this.address = "";
     }
 
     public String getAvailableDates() {
@@ -114,6 +116,14 @@ public class Business {
 
     public String getBusiness_name() {
         return business_name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getAddress() {
+        return address;
     }
 
     public void setOwnerId(String ownerId) {

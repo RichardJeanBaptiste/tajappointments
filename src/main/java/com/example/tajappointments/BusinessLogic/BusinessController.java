@@ -48,6 +48,11 @@ public class BusinessController {
         return "new business";
     }
 
+    @PostMapping("/api/edit/business")
+    public String editBusiness() {
+        return "Business Edited";
+    }
+
     @PostMapping("/api/new/service")
     public String newService(@RequestBody ServicesForm[] form) {
 
@@ -76,15 +81,15 @@ public class BusinessController {
 
 
     @PostMapping("/api/remove/service")
-    public String removeService(@RequestBody ServicesForm form) {
-
-        String serviceQuery = form.getServiceQuery();
-        String businessId = form.getBusinessId();
+    public String removeService(@RequestBody ServicesForm[] form) {
 
         try {
 
-            businessService.removeServicesById(UUID.fromString(businessId), UUID.fromString(serviceQuery));
-            servicesService.removeById(UUID.fromString(serviceQuery));
+            for (ServicesForm currentService: form) {
+
+                businessService.removeServicesById(UUID.fromString(currentService.getBusinessId()), UUID.fromString(currentService.getServiceQuery()));
+                servicesService.removeById(UUID.fromString(currentService.getServiceQuery()));
+            }
 
             return "Service Removed";
 
@@ -95,4 +100,5 @@ public class BusinessController {
 
 //    @PostMapping("/api/edit/service")
 //    public String editService(@RequestBody )
+    
 }
