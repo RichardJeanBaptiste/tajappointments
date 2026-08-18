@@ -110,13 +110,27 @@ public class BusinessController {
     @PostMapping("/api/remove/service")
     public String removeService(@RequestBody ServicesForm[] form) {
 
+
+        ArrayList<UUID> serviceIds = new ArrayList<>();
+        ArrayList<Services> servicesToRemove = new ArrayList<>();
+        String businessId = "";
+
         try {
 
             for (ServicesForm currentService: form) {
 
-                businessService.removeServicesById(UUID.fromString(currentService.getBusinessId()), UUID.fromString(currentService.getServiceQuery()));
-                servicesService.removeById(UUID.fromString(currentService.getServiceQuery()));
+                if(businessId.isEmpty()) {
+                    businessId = currentService.getBusinessId();
+                }
+
+                Services x = servicesService.findById(UUID.fromString(currentService.getServiceQuery()));
+
+                serviceIds.add(x.getId());
+                servicesToRemove.add(x);
             }
+
+            businessService.removeServicesById(UUID.fromString(businessId), serviceIds);
+            servicesService.removeServices(servicesToRemove);
 
             return "Service Removed";
 

@@ -72,11 +72,14 @@ public class BusinessService {
         businessRepository.save(business);
     }
 
-    public void removeServicesById(UUID businessId, UUID serviceId) {
+    public void removeServicesById(UUID businessId,  ArrayList<UUID> serviceIds) {
 
         Business business = findById(businessId);
 
-        business.getServices().remove(serviceId);
+        for (UUID service: serviceIds) {
+            business.getServices().remove(service);
+        }
+
 
         businessRepository.save(business);
     }
