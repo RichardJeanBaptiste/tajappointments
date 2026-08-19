@@ -6,6 +6,9 @@ public class AppointmentForm {
     private String serviceName;
     private String businessId;
     private String clientId;
+    private String serviceId;
+    private String startTime;
+    private String endTime;
 
 
     public void setDate(String date) {
@@ -38,5 +41,29 @@ public class AppointmentForm {
 
     public String getClientId() {
         return clientId;
+    }
+
+    public void setServiceId(String serviceId) {
+        this.serviceId = serviceId;
+    }
+
+    public String getServiceId() {
+        return serviceId;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
     }
 }

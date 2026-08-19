@@ -23,6 +23,7 @@ public class Appointments {
     private UUID clientId;
     private UUID serviceId;
 
+    private Instant date;
     private Instant startTime;
     private Instant endTime;
 
@@ -54,6 +55,14 @@ public class Appointments {
 
     public String getServiceId() {
         return serviceId.toString();
+    }
+
+    public void setDate(Instant date) {
+        this.date = date;
+    }
+
+    public String getDate() {
+        return date.toString();
     }
 
     public void setStartTime(Instant startTime) {

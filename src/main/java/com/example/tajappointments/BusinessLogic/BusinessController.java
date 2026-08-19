@@ -1,6 +1,8 @@
 package com.example.tajappointments.BusinessLogic;
 
 import com.example.tajappointments.AppointmentLogic.AppointmentForm;
+import com.example.tajappointments.AppointmentLogic.AppointmentService;
+import com.example.tajappointments.AppointmentLogic.Appointments;
 import com.example.tajappointments.ServiceForm.Services;
 import com.example.tajappointments.ServiceForm.ServicesForm;
 import com.example.tajappointments.ServiceForm.ServicesService;
@@ -10,23 +12,31 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.Instant;
 import java.util.*;
 
 @RestController
 public class BusinessController {
 
-    private static final Logger log = LoggerFactory.getLogger(BusinessController.class);
+    //private static final Logger log = LoggerFactory.getLogger(BusinessController.class);
     private final BusinessService businessService;
     private final ServicesService servicesService;
+    private final AppointmentService appointmentService;
 
-    public BusinessController(BusinessService businessService, ServicesService servicesService) {
+    public BusinessController(BusinessService businessService, ServicesService servicesService, AppointmentService appointmentService) {
         this.businessService = businessService;
         this.servicesService = servicesService;
+        this.appointmentService = appointmentService;
     }
 
     @PostMapping("/business")
     public Business create(@RequestBody Business business){
         return businessService.create(business);
+    }
+
+    @PostMapping("/appointment")
+    public Appointments create(@RequestBody Appointments appointment) {
+        return appointmentService.create(appointment);
     }
 
     @PostMapping("/api/new/business")
@@ -88,7 +98,7 @@ public class BusinessController {
                 newService.setId(newId);
                 newService.setName(currentService.getServiceName());
                 newService.setDescription(currentService.getServiceDescription());
-                newService.setDuration(currentService.getServiceDuration());
+                newService.setDuration(Integer.parseInt(currentService.getServiceDuration()));
                 newService.setCost(currentService.getServiceCost());
                 newService.setBusinessId(String.valueOf(businessId));
 
@@ -143,7 +153,42 @@ public class BusinessController {
     @PostMapping("/api/add/appointments")
     public String addAppointment(@RequestBody AppointmentForm form) {
 
-        return "Appointment Added";
+        
+        
+        try {
+
+            Instant date = Instant.parse(form.getDate());
+            UUID businessId = UUID.fromString(form.getBusinessId());
+            UUID clientId = UUID.fromString(form.getClientId());
+            UUID serviceId = UUID.fromString(form.getServiceId());
+            Instant startTime = Instant.parse(form.getStartTime());
+            Instant endTime = Instant.parse(form.getEndTime());
+
+            // Services s = servicesService.findById(serviceId);
+
+            Appointments newAppointment = new Appointments();
+
+            newAppointment.setDate(date);
+            newAppointment.setBusinessId(businessId);
+            newAppointment.setClientId(clientId);
+            newAppointment.setServiceId(serviceId);
+            newAppointment.setStartTime(startTime);
+            newAppointment.setEndTime(endTime);
+
+            appointmentService.create(newAppointment);
+
+            //System.out.println(date + "\n" + businessId + "\n" + clientId + "\n" + serviceId);
+
+            return "Appointment Added";
+            
+        } catch (Exception e) {
+            // TODO: handle exception
+            System.out.println(e);
+            return "Failed to create appointment";
+        }
+        
+
+        
     }
 
 //    @PostMapping("/api/edit/service")

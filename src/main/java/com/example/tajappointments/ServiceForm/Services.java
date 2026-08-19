@@ -3,7 +3,6 @@ package com.example.tajappointments.ServiceForm;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.UuidGenerator;
-
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
@@ -29,7 +28,7 @@ public class Services {
 
     private String name;
     private String cost;
-    private String duration;
+    private int duration;
     private String description;
     private String businessId;
     private boolean availability;
@@ -66,11 +65,11 @@ public class Services {
         return cost;
     }
 
-    public void setDuration(String duration) {
+    public void setDuration(int duration) {
         this.duration = duration;
     }
 
-    public String getDuration() {
+    public int getDuration() {
         return duration;
     }
 
