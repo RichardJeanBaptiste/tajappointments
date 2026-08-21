@@ -1,18 +1,12 @@
 package com.example.tajappointments.BusinessLogic;
 
-import com.example.tajappointments.AppointmentLogic.AppointmentForm;
-import com.example.tajappointments.AppointmentLogic.AppointmentService;
-import com.example.tajappointments.AppointmentLogic.Appointments;
-import com.example.tajappointments.ServiceForm.Services;
-import com.example.tajappointments.ServiceForm.ServicesForm;
-import com.example.tajappointments.ServiceForm.ServicesService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.example.tajappointments.ServiceLogic.Services;
+import com.example.tajappointments.ServiceLogic.ServicesForm;
+import com.example.tajappointments.ServiceLogic.ServicesService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.Instant;
 import java.util.*;
 
 @RestController
@@ -21,12 +15,10 @@ public class BusinessController {
     //private static final Logger log = LoggerFactory.getLogger(BusinessController.class);
     private final BusinessService businessService;
     private final ServicesService servicesService;
-    private final AppointmentService appointmentService;
 
-    public BusinessController(BusinessService businessService, ServicesService servicesService, AppointmentService appointmentService) {
+    public BusinessController(BusinessService businessService, ServicesService servicesService ) {
         this.businessService = businessService;
         this.servicesService = servicesService;
-        this.appointmentService = appointmentService;
     }
 
     @PostMapping("/business")
@@ -34,10 +26,6 @@ public class BusinessController {
         return businessService.create(business);
     }
 
-    @PostMapping("/appointment")
-    public Appointments create(@RequestBody Appointments appointment) {
-        return appointmentService.create(appointment);
-    }
 
     @PostMapping("/api/new/business")
     public String newBusinessHandler(@RequestBody BusinessForm form) {
@@ -150,46 +138,7 @@ public class BusinessController {
         }
     }
 
-    @PostMapping("/api/add/appointments")
-    public String addAppointment(@RequestBody AppointmentForm form) {
-
-        
-        
-        try {
-
-            Instant date = Instant.parse(form.getDate());
-            UUID businessId = UUID.fromString(form.getBusinessId());
-            UUID clientId = UUID.fromString(form.getClientId());
-            UUID serviceId = UUID.fromString(form.getServiceId());
-            Instant startTime = Instant.parse(form.getStartTime());
-            Instant endTime = Instant.parse(form.getEndTime());
-
-            // Services s = servicesService.findById(serviceId);
-
-            Appointments newAppointment = new Appointments();
-
-            newAppointment.setDate(date);
-            newAppointment.setBusinessId(businessId);
-            newAppointment.setClientId(clientId);
-            newAppointment.setServiceId(serviceId);
-            newAppointment.setStartTime(startTime);
-            newAppointment.setEndTime(endTime);
-
-            appointmentService.create(newAppointment);
-
-            //System.out.println(date + "\n" + businessId + "\n" + clientId + "\n" + serviceId);
-
-            return "Appointment Added";
-            
-        } catch (Exception e) {
-            // TODO: handle exception
-            System.out.println(e);
-            return "Failed to create appointment";
-        }
-        
-
-        
-    }
+    
 
 //    @PostMapping("/api/edit/service")
 //    public String editService(@RequestBody Ser) {

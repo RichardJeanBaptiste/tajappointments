@@ -1,4 +1,4 @@
-package com.example.tajappointments.ServiceForm;
+package com.example.tajappointments.ServiceLogic;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

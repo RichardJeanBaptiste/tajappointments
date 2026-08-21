@@ -1,6 +1,4 @@
-package com.example.tajappointments.ServiceForm;
-
-import java.util.UUID;
+package com.example.tajappointments.ServiceLogic;
 
 public class ServicesForm {
 

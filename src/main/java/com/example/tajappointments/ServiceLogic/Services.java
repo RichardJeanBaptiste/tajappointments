@@ -1,8 +1,8 @@
-package com.example.tajappointments.ServiceForm;
+package com.example.tajappointments.ServiceLogic;
 
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.UuidGenerator;
+
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
