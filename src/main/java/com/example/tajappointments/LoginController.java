@@ -1,7 +1,5 @@
 package com.example.tajappointments;
 
-import com.example.tajappointments.BusinessLogic.Business;
-import com.example.tajappointments.BusinessLogic.BusinessForm;
 import com.example.tajappointments.BusinessLogic.BusinessService;
 import com.example.tajappointments.ClientLogic.Client;
 import com.example.tajappointments.ClientLogic.ClientForm;
@@ -21,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class LoginController {
 
-    private final BusinessService businessService;
+    //private final BusinessService businessService;
 
     private final ClientService clientService;
 
@@ -33,7 +31,7 @@ public class LoginController {
 
     public LoginController(BusinessService businessService, ClientService clientService, GuestService guestService, UserService userService, AuthenticationManager authenticationManager) {
 
-        this.businessService = businessService;
+        //this.businessService = businessService;
         this.clientService = clientService;
         this.guestService = guestService;
         this.userService = userService;

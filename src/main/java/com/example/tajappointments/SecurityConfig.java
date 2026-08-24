@@ -37,7 +37,9 @@ public class SecurityConfig {
                                 "/api/new/service",
                                 "/api/remove/service",
                                 "/api/edit/business",
-                                "/api/add/appointments"
+                                "/api/add/appointments",
+                                "/api/remove/appointments",
+                                "/api/edit/appointments"
                         ).permitAll()
 
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()

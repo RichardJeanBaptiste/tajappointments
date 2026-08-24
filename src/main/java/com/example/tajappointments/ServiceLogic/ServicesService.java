@@ -3,7 +3,7 @@ package com.example.tajappointments.ServiceLogic;
 
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -33,12 +33,8 @@ public class ServicesService {
     }
 
     public void addMultipleServices(List<Services> services) {
-
-        List<Services> newServices = new ArrayList<>();
-
-        newServices.addAll(services);
-
-        servicesRepository.saveAll(newServices);
+        
+        servicesRepository.saveAll(services);
     }
 
     public void removeServices(List<Services> services) {

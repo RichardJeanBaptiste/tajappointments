@@ -55,11 +55,63 @@ public class AppointmentController {
             return "Appointment Added";
             
         } catch (Exception e) {
-            // TODO: handle exception
+        
             System.out.println(e);
             return "Failed to create appointment";
         }
         
     }
+
+    @PostMapping("/api/remove/appointments")
+    public String removeAppointments(@RequestBody AppointmentForm[] form) {
+        
+        List<Appointments> remove = new ArrayList<>();
+
+        try {
+
+            for( AppointmentForm x : form) {
+
+                UUID appointmentId = UUID.fromString(x.getAppointmentId());
+
+                Appointments current = appointmentService.findById(appointmentId);
+
+                remove.add(current);
+            }
+
+            appointmentService.removeAppointments(remove);
+            
+        } catch (Exception e) {
+            // TODO: handle exception
+            System.out.println(e);
+        }
+        
+        return "Appointment Form";
+    }
+
+    @PostMapping("/api/edit/appointments")
+    public String editAppointments(@RequestBody AppointmentForm form) {
+        
+        UUID appointmentId = UUID.fromString(form.getAppointmentId());
+        String serviceId = form.getServiceId();
+        String date = form.getDate();
+        String startTime = form.getStartTime();
+        String endTime = form.getEndTime();
+
+        HashMap<String, String> fields = new HashMap<String, String>(
+            Map.of(
+                "serviceId" , serviceId,
+                "date", date,
+                "startTime", startTime,
+                "endTime", endTime 
+            )
+        );
+
+        appointmentService.editAppointments(appointmentId, fields);
+
+        
+        return "edit appointments";
+    }
+    
+    
 
 }

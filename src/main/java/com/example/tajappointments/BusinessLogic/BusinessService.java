@@ -53,7 +53,7 @@ public class BusinessService {
                    }
                default:
                    break;
-           }
+            }
         }
 
         businessRepository.save(business);

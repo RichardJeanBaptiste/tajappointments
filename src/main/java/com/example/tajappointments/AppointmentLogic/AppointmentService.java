@@ -1,6 +1,8 @@
 package com.example.tajappointments.AppointmentLogic;
 
 import org.springframework.stereotype.Service;
+
+import java.time.Instant;
 import java.util.*;
 
 @Service
@@ -23,10 +25,31 @@ public class AppointmentService {
 
     public void addAppointments(List<Appointments> appointments) {
 
-        List<Appointments> newAppointments = new ArrayList<>();
+        appointmentsRepository.saveAll(appointments);
+    }
 
-        newAppointments.addAll(appointments);
+    public void removeAppointments(List<Appointments> A) {
+        appointmentsRepository.deleteAll(A);
+    }
 
-        appointmentsRepository.saveAll(newAppointments);
+    public void editAppointments(UUID appointmentId, HashMap<String, String> editFields) {
+
+        for ( String field : editFields.keySet()) {
+
+            String currentVal = editFields.get(field);
+
+            System.out.println(currentVal);
+        }
+        
+        // UUID serviceId = UUID.fromString(newFields.get(0));
+        // Instant date = Instant.parse(newFields.get(1));
+        // Instant startTime = Instant.parse(newFields.get(2));
+        // Instant endTime = Instant.parse(newFields.get(3));
+
+        // Appointments x = findById(appointmentId);
+        // x.setServiceId(serviceId);
+        // x.setDate(date);
+        // x.setStartTime(startTime);
+        // x.setEndTime(endTime);
     }
 }
