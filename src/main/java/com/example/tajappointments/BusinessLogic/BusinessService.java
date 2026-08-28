@@ -1,6 +1,8 @@
 package com.example.tajappointments.BusinessLogic;
 import org.springframework.stereotype.Service;
 
+import com.example.tajappointments.AppointmentLogic.Appointments;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
@@ -58,6 +60,8 @@ public class BusinessService {
 
         businessRepository.save(business);
     }
+
+    
 
     public void addToServicesById(UUID businessId, ArrayList<UUID> serviceIds) {
 
