@@ -93,23 +93,7 @@ public class AppointmentController {
 
     @PostMapping("/api/edit/appointments")
     public String editAppointments(@RequestBody AppointmentForm[] form) {
-        
-        // UUID appointmentId = UUID.fromString(form.getAppointmentId());
-        // String serviceId = form.getServiceId();
-        // String date = form.getDate();
-        // String startTime = form.getStartTime();
-        // String endTime = form.getEndTime();
-
-        // HashMap<String, String> fields = new HashMap<String, String>(
-        //     Map.of(
-        //         "serviceId" , serviceId,
-        //         "date", date,
-        //         "startTime", startTime,
-        //         "endTime", endTime 
-        //     )
-        // );
-
-        // appointmentService.editAppointments(appointmentId, fields);
+       
 
         List<Appointments> edits = new ArrayList<>();
 
@@ -148,6 +132,8 @@ public class AppointmentController {
                     if(x.getEndTime() != null) {
                         current.setEndTime(Instant.parse(endTime));
                     }
+                } else {
+                    continue;
                 }
 
                 edits.add(current);
@@ -160,7 +146,7 @@ public class AppointmentController {
         } catch (Exception e) {
             // TODO: handle exception
             System.out.println(e);
-            return "Something went wrong adding appointments";
+            return "Something went wrong editing appointments";
         }
 
     }

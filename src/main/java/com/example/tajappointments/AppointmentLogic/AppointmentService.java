@@ -31,44 +31,6 @@ public class AppointmentService {
         appointmentsRepository.deleteAll(A);
     }
 
-//    public void editAppointments(UUID appointmentId, HashMap<String, String> editFields) {
-//
-//
-//        Appointments x = findById(appointmentId);
-//
-//        for ( String field : editFields.keySet()) {
-//
-//            String currentVal = editFields.get(field);
-//
-//            switch(field) {
-//                case "serviceId":
-//                    if (!currentVal.isEmpty()) {
-//                        x.setServiceId(UUID.fromString(currentVal));
-//                    }
-//                    break;
-//                case "date":
-//                    if(!currentVal.isEmpty()) {
-//                        x.setDate(Instant.parse(currentVal));
-//                    }
-//                    break;
-//                case "startTime":
-//                    if(!currentVal.isEmpty()) {
-//                        x.setStartTime(Instant.parse(currentVal));
-//                    }
-//                    break;
-//                case "endTime":
-//                    if(!currentVal.isEmpty()) {
-//                        x.setEndTime(Instant.parse(currentVal));
-//                    }
-//                    break;
-//                default:
-//                    break;
-//            }
-//        }
-//
-//        appointmentsRepository.save(x);
-//    }
-
     public void editAppointments(List<Appointments> x) {
         
         appointmentsRepository.saveAll(x);
