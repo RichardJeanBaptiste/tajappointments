@@ -22,7 +22,7 @@ public class AppointmentService {
                     .orElseThrow(() -> new RuntimeException("Appointments Not Found"));
     }
 
-    public void addAppointments(List<Appointments> appointments) {
+    public void saveAppointments(List<Appointments> appointments) {
 
         appointmentsRepository.saveAll(appointments);
     }
@@ -31,8 +31,4 @@ public class AppointmentService {
         appointmentsRepository.deleteAll(A);
     }
 
-    public void editAppointments(List<Appointments> x) {
-        
-        appointmentsRepository.saveAll(x);
-    }
 }

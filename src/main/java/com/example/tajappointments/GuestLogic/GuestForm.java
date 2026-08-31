@@ -4,6 +4,7 @@ public class GuestForm {
 
     private String guestEmail;
     private String guestName;
+    private String guestId;
 
     public void setGuestEmail(String guestEmail) {
         this.guestEmail = guestEmail;
@@ -19,5 +20,13 @@ public class GuestForm {
 
     public String getGuestName() {
         return guestName;
+    }
+
+    public void setGuestId(String guestId) {
+        this.guestId = guestId;
+    }
+
+    public String getGuestId() {
+        return guestId;
     }
 }

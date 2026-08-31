@@ -52,7 +52,7 @@ public class AppointmentController {
                 
             }
 
-            appointmentService.addAppointments(x);
+            appointmentService.saveAppointments(x);
 
             return "Appointment Added";
             
@@ -138,7 +138,7 @@ public class AppointmentController {
                 edits.add(current);
             }
 
-            appointmentService.editAppointments(edits);
+            appointmentService.saveAppointments(edits);
 
             return "Appointments Edited";
             
