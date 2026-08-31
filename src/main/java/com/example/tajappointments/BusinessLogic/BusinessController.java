@@ -1,8 +1,6 @@
 package com.example.tajappointments.BusinessLogic;
 
-import com.example.tajappointments.ServiceLogic.Services;
-import com.example.tajappointments.ServiceLogic.ServicesForm;
-import com.example.tajappointments.ServiceLogic.ServicesService;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,11 +12,9 @@ public class BusinessController {
 
     //private static final Logger log = LoggerFactory.getLogger(BusinessController.class);
     private final BusinessService businessService;
-    private final ServicesService servicesService;
 
-    public BusinessController(BusinessService businessService, ServicesService servicesService ) {
+    public BusinessController(BusinessService businessService ) {
         this.businessService = businessService;
-        this.servicesService = servicesService;
     }
 
     @PostMapping("/business")
@@ -67,83 +63,5 @@ public class BusinessController {
         return "Business Edited";
     }
 
-    @PostMapping("/api/new/service")
-    public String newService(@RequestBody ServicesForm[] form) {
-
-        ArrayList<UUID> serviceIds = new ArrayList<>();
-        List<Services> newServices = new ArrayList<>();
-
-        // Test - ID -> get userId from path
-        UUID businessId = UUID.fromString("09c695e6-bc71-4ffd-94bd-6f450bf128b5");
-
-        try {
-
-            for(ServicesForm currentService : form){
-                Services newService = new Services();
-
-                UUID newId = UUID.randomUUID();
-
-                newService.setId(newId);
-                newService.setName(currentService.getServiceName());
-                newService.setDescription(currentService.getServiceDescription());
-                newService.setDuration(Integer.parseInt(currentService.getServiceDuration()));
-                newService.setCost(currentService.getServiceCost());
-                newService.setBusinessId(String.valueOf(businessId));
-
-                newServices.add(newService);
-                serviceIds.add(newId);
-            }
-
-            servicesService.addMultipleServices(newServices);
-            businessService.addToServicesById(businessId, serviceIds);
-
-            return "Services Array";
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
-
-    @PostMapping("/api/remove/service")
-    public String removeService(@RequestBody ServicesForm[] form) {
-
-
-        ArrayList<UUID> serviceIds = new ArrayList<>();
-        ArrayList<Services> servicesToRemove = new ArrayList<>();
-        String businessId = "";
-
-        try {
-
-            for (ServicesForm currentService: form) {
-
-                if(businessId.isEmpty()) {
-                    businessId = currentService.getBusinessId();
-                }
-
-                Services x = servicesService.findById(UUID.fromString(currentService.getServiceQuery()));
-
-                serviceIds.add(x.getId());
-                servicesToRemove.add(x);
-            }
-
-            businessService.removeServicesById(UUID.fromString(businessId), serviceIds);
-            servicesService.removeServices(servicesToRemove);
-
-            return "Service Removed";
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    
-
-//    @PostMapping("/api/edit/service")
-//    public String editService(@RequestBody Ser) {
-//
-//
-//    }
     
 }

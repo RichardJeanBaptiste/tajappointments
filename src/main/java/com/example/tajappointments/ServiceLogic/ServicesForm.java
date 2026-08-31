@@ -7,8 +7,17 @@ public class ServicesForm {
     private String serviceDuration;
     private String serviceDescription;
     private String serviceQuery;
+    private String serviceId;
     private String businessId;
 
+
+    public void setServiceId(String serviceId) {
+        this.serviceId = serviceId; 
+    }
+
+    public String getServiceId() {
+        return serviceId;
+    }
 
     public void setServiceName(String serviceName){
         this.serviceName = serviceName;

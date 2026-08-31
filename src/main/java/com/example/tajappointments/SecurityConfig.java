@@ -32,9 +32,12 @@ public class SecurityConfig {
                                 "/api/auth/register",
                                 "/new/user",
 
-                                /* Remove Routes in Production*/
+                                /* Remove Routes in Production
+                                   Need Auth First
+                                */
                                 "/api/new/business",
                                 "/api/new/service",
+                                "/api/edit/service",
                                 "/api/remove/service",
                                 "/api/edit/business",
                                 "/api/add/appointments",
