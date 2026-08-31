@@ -1,6 +1,6 @@
 package com.example.tajappointments.AppointmentLogic;
 
-import com.example.tajappointments.AppointmentLogic.AppointmentsRepository;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,12 +11,11 @@ import java.util.*;
 @RestController
 public class AppointmentController {
 
-    private final AppointmentsRepository appointmentsRepository;
+    
     private final AppointmentService appointmentService;
 
-    public AppointmentController(AppointmentService appointmentService, AppointmentsRepository appointmentsRepository) {
+    public AppointmentController(AppointmentService appointmentService ) {
         this.appointmentService = appointmentService;
-        this.appointmentsRepository = appointmentsRepository;
     }
 
     @PostMapping("/appointment")

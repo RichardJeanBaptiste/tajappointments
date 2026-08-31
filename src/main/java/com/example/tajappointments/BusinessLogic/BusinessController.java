@@ -1,6 +1,7 @@
 package com.example.tajappointments.BusinessLogic;
 
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +25,7 @@ public class BusinessController {
 
 
     @PostMapping("/api/new/business")
-    public String newBusinessHandler(@RequestBody BusinessForm form) {
+    public ResponseEntity<String> newBusinessHandler(@RequestBody BusinessForm form) {
 
         String businessName = form.getBusinessName();
         String email = form.getBusinessEmail();
@@ -40,11 +41,13 @@ public class BusinessController {
 
         businessService.create(x);
 
-        return "new business";
+        String res = "Business Created - " + businessName;
+
+        return ResponseEntity.ok(res);
     }
 
     @PostMapping("/api/edit/business")
-    public String editBusiness(@RequestBody BusinessForm form) {
+    public ResponseEntity<String> editBusiness(@RequestBody BusinessForm form) {
 
         UUID id = UUID.fromString(form.getBusinessId());
         String name = (form.getOwnerName() == null) ? "" : form.getOwnerName();
@@ -60,7 +63,9 @@ public class BusinessController {
 
         businessService.editFields(id, fields);
 
-        return "Business Edited";
+        String res = "Business Edited - "+ id;
+
+        return ResponseEntity.ok(res);
     }
 
     
