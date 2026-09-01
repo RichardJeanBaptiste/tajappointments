@@ -9,6 +9,7 @@ import com.example.tajappointments.ClientLogic.ClientService;
 import com.example.tajappointments.GuestLogic.Guest;
 import com.example.tajappointments.GuestLogic.GuestForm;
 import com.example.tajappointments.GuestLogic.GuestService;
+import com.example.tajappointments.UserLogic.EmailAlreadyExistsException;
 import com.example.tajappointments.UserLogic.User;
 import com.example.tajappointments.UserLogic.UserForm;
 import com.example.tajappointments.UserLogic.UserService;
@@ -97,21 +98,31 @@ public class LoginController {
     }
 
     @PostMapping("/api/auth/register")
-    public String userHandler(@RequestBody UserForm form){
+    public ResponseEntity<String> userHandler(@RequestBody UserForm form){
 
-        String email = form.getUserEmail();
-        String password = form.getUserPassword();
-        String role = form.getRole();
+       try {
 
-        User x = new User();
+            String email = form.getUserEmail();
+            String password = form.getUserPassword();
+            String role = form.getRole();
 
-        x.setEmail(email);
-        x.setPassword(password);
-        x.setRole(role);
+            User x = new User();
 
-        userService.create(x);
+            x.setEmail(email);
+            x.setPassword(password);
+            x.setRole(role);
 
-        return "User Registered";
+            userService.create(x);
+
+            return ResponseEntity.ok("User Created");
+            
+        } catch (EmailAlreadyExistsException e) {
+            // TODO: handle exception
+
+            return ResponseEntity.badRequest().body("Email already exists");
+        }
+
+        
     }
 
 

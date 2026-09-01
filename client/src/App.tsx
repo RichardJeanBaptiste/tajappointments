@@ -1,9 +1,12 @@
 import { useState } from 'react'
-import { Button, Form,  } from 'react-bootstrap';
+import { Button, Form  } from 'react-bootstrap';
+import { useNavigate } from 'react-router';
 import './App.css'
 import * as React from "react";
 
 function App() {
+
+    let navigate = useNavigate();
   
   const [ loginForm, setLoginForm ] = useState({
     email: '',
@@ -72,8 +75,25 @@ function App() {
       });
 
       const message = await response.text();
+      const status = await response.status;
 
-      console.log(message);
+      
+
+      if(status == 200) {
+        console.log(message);
+        navigate("/dashboard");
+      }
+
+      if(status == 400) {
+       // console.log(message);
+        alert(message);
+      }
+
+      if(status == 403) {
+        console.log("Something went wrong")
+      }
+
+      
   }
 
   return (
@@ -93,6 +113,7 @@ function App() {
         </Form>
 
         <Form style={{ width: '45%', marginTop: '5%' }}>
+            <div>Registration Form</div>
             <Form.Group>
                 <Form.Label>Email: </Form.Label>
                 <Form.Control type="email" placeholder="email" onChange={(e) => handleRegistrationFormChange(e,"email")} value={registrationForm.email}/>

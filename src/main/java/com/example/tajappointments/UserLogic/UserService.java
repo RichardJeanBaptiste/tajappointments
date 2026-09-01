@@ -1,6 +1,7 @@
 package com.example.tajappointments.UserLogic;
 
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -17,12 +18,39 @@ public class UserService {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
+    
+    public Boolean checkEmail(String email){
+        if(findByEmail(email) == null) {
+            return false;
+        }
 
-    public User create(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+        return true;
     }
 
+
+    public User create(User user) {
+
+        // if (checkEmail(user.getEmail())) {
+        //     throw new EmailAlreadyExistsException("Email already registered: " + user.getEmail());
+        // }
+
+        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
+            throw new EmailAlreadyExistsException("Email already registered: " + user.getEmail());
+        }
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+
+        try {
+            return userRepository.save(user);
+        } catch (DataIntegrityViolationException e) {
+            // Safety net for race conditions (two requests slipping past the check above)
+            throw new EmailAlreadyExistsException("Email already registered: " + user.getEmail());
+        }
+        
+    }
+
+    
     public Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
