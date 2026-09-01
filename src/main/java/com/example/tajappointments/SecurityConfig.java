@@ -20,7 +20,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http)
             throws Exception {
         http
-                .csrf(csrf -> csrf.disable())
+                //.csrf(csrf -> csrf.disable())
 
                 .cors(Customizer.withDefaults())
 
@@ -30,21 +30,22 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/api/auth/login",
                                 "/api/auth/register",
-                                "/new/user",
-
+                                "/api/new/business",
+                                "/api/new/client",
+                                "/api/new/guest"
+                        
                                 /* Remove Routes in Production
                                    Need Auth First
                                 */
-                                "/api/new/business",
-                                "/api/new/service",
-                                "/api/edit/service",
-                                "/api/remove/service",
-                                "/api/edit/business",
-                                "/api/add/appointments",
-                                "/api/remove/appointments",
-                                "/api/edit/appointments",
-                                "/api/new/guest",
-                                "/api/remove/guest"
+                                // "/api/new/business",
+                                // "/api/new/service",
+                                // "/api/edit/service",
+                                // "/api/remove/service",
+                                // "/api/edit/business",
+                                // "/api/add/appointments",
+                                // "/api/remove/appointments",
+                                // "/api/edit/appointments"
+
                         ).permitAll()
 
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()

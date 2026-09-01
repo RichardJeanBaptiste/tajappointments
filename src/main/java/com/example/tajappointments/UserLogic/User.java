@@ -21,6 +21,9 @@ public class User {
     private String email;
     private String password;
     private String role;
+    
+    private UUID businessId;
+    private UUID clientId;
 
     public String getId() {
         return id.toString();
@@ -48,5 +51,21 @@ public class User {
 
     public String getRole() {
         return role;
+    }
+
+    public void setBusinessId(UUID businessId) {
+        this.businessId = businessId;
+    }
+
+    public UUID getBusinessId() {
+        return businessId;
+    }
+
+    public void setClientId(UUID clientId) {
+        this.clientId = clientId;
+    }
+
+    public UUID getClientId() {
+        return clientId;
     }
 }

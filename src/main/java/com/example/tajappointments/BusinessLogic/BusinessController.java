@@ -41,10 +41,12 @@ public class BusinessController {
 
         businessService.create(x);
 
-        String res = "Business Created - " + businessName;
+        String res = "New Business Created - " + businessName;
 
         return ResponseEntity.ok(res);
     }
+
+
 
     @PostMapping("/api/edit/business")
     public ResponseEntity<String> editBusiness(@RequestBody BusinessForm form) {
@@ -63,9 +65,7 @@ public class BusinessController {
 
         businessService.editFields(id, fields);
 
-        String res = "Business Edited - "+ id;
-
-        return ResponseEntity.ok(res);
+        return ResponseEntity.ok("Business Edited");
     }
 
     
