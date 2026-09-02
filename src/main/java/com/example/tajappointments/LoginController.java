@@ -14,6 +14,9 @@ import com.example.tajappointments.UserLogic.User;
 import com.example.tajappointments.UserLogic.UserForm;
 import com.example.tajappointments.UserLogic.UserService;
 
+import java.util.Map;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -42,22 +45,20 @@ public class LoginController {
     //private final BusinessService businessService;
 
     private final ClientService clientService;
-
     private final GuestService guestService;
-
     private final UserService userService;
-
-    private final AuthenticationManager authenticationManager;
-
     private final BusinessService businessService;
+    private final AuthenticationManager authenticationManager;
+    private final JwtService jwtService;
 
-    public LoginController(BusinessService businessService, ClientService clientService, GuestService guestService, UserService userService, AuthenticationManager authenticationManager) {
+    public LoginController(BusinessService businessService, ClientService clientService, GuestService guestService, UserService userService, AuthenticationManager authenticationManager, JwtService jwtService) {
 
         this.businessService = businessService;
         this.clientService = clientService;
         this.guestService = guestService;
         this.userService = userService;
         this.authenticationManager = authenticationManager;
+        this.jwtService = jwtService;
     }
 
 
@@ -79,7 +80,7 @@ public class LoginController {
 
 
     @PostMapping("/api/auth/login")
-    public ResponseEntity<String> loginHandler(@RequestBody LoginForm form) {
+    public ResponseEntity<?> loginHandler(@RequestBody LoginForm form) {
 
         String email = form.getLoginEmail();
         String password = form.getLoginPassword();
@@ -91,14 +92,17 @@ public class LoginController {
                             password
                     )
             );
-            return ResponseEntity.ok("Login successful");
+
+            String token = jwtService.generateToken(email);
+
+            return ResponseEntity.ok(Map.of("token",token));
         } catch (AuthenticationException e) {
             return ResponseEntity.badRequest().body("Username or Password failed");
         }
     }
 
     @PostMapping("/api/auth/register")
-    public ResponseEntity<String> userHandler(@RequestBody UserForm form){
+    public ResponseEntity<?> userHandler(@RequestBody UserForm form){
 
        try {
 
@@ -114,15 +118,14 @@ public class LoginController {
 
             userService.create(x);
 
-            return ResponseEntity.ok("User Created");
+            String token = jwtService.generateToken(email);
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("token", token));
             
         } catch (EmailAlreadyExistsException e) {
-            // TODO: handle exception
-
+            
             return ResponseEntity.badRequest().body("Email already exists");
         }
-
-        
     }
 
 
