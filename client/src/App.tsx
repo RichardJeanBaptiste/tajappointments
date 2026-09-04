@@ -161,10 +161,15 @@ function App() {
                 <>  
                     <Fade in={!showLogin} appear unmountOnExit>
                         <div className='formStyle'>
-                            <div>Registration Form</div>
+                            <h2>Registration Form</h2>
                             <Form.Group className='mb-3'>
                                 <Form.Label>Email: </Form.Label>
                                 <Form.Control type="email" placeholder="email" onChange={(e) => handleRegistrationFormChange(e,"email")} value={registrationForm.email}/>
+                            </Form.Group>
+
+                            <Form.Group className='mb-3'>
+                                <Form.Label>Password: </Form.Label>
+                                <Form.Control type="password" placeholder="password" onChange={(e) => handleRegistrationFormChange(e, "password")} value={registrationForm.password}/>
                             </Form.Group>
 
                             <Form.Group className='mb-3'>
