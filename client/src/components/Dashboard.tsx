@@ -1,6 +1,5 @@
 import { Button } from "react-bootstrap";
 import { useAuth } from "./AuthContext";
-//import { useEffect } from "react";
 
 export default function Dashboard() {
 
@@ -21,7 +20,5 @@ export default function Dashboard() {
                 <Button variant="danger" onClick={logout}>Logout</Button>
             </div>
         )
-    }
-
-    
+    }    
 }

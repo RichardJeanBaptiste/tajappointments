@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Button, Form  } from 'react-bootstrap';
-import { useNavigate } from 'react-router';
+import { useNavigate, useLocation } from 'react-router';
 import './App.css'
 import * as React from "react";
 import { useAuth } from './components/AuthContext';
@@ -12,6 +12,9 @@ function App() {
 
         let navigate = useNavigate();
         const { login } = useAuth();
+        const location = useLocation();
+
+        const from = location.state?.from?.pathname || "/dashboard";
     
         const [ loginForm, setLoginForm ] = useState({
             email: '',
@@ -67,7 +70,7 @@ function App() {
             if(status == 200) {
                 const data = await response.json();
                 login(data.token);
-                navigate("/dashboard");
+                navigate(from, { replace: true });
             }
 
             if(status == 400) {
