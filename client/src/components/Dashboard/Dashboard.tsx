@@ -1,5 +1,6 @@
 import { Button } from "react-bootstrap";
-import { useAuth } from "./AuthContext";
+import { useAuth } from "../AuthContext";
+import "./Dashboard.css";
 
 export default function Dashboard() {
 
