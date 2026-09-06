@@ -1,9 +1,14 @@
 package com.example.tajappointments.UserLogic;
 
 import jakarta.persistence.*;
+
+import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UuidGenerator;
+import org.hibernate.type.SqlTypes;
 
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -22,8 +27,12 @@ public class User {
     private String password;
     private String role;
     
-    private UUID businessId;
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(columnDefinition = "jsonb")
+    private List<UUID> businessIds = new ArrayList<UUID>();
+
     private UUID clientId;
+
 
     public String getId() {
         return id.toString();
@@ -53,12 +62,12 @@ public class User {
         return role;
     }
 
-    public void setBusinessId(UUID businessId) {
-        this.businessId = businessId;
+    public List<UUID> getBusinessIds() {
+        return businessIds;
     }
 
-    public UUID getBusinessId() {
-        return businessId;
+    public void setBusinessIds() {
+        this.businessIds = new ArrayList<>();
     }
 
     public void setClientId(UUID clientId) {

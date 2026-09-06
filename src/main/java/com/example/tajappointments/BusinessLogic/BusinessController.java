@@ -6,16 +6,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.tajappointments.UserLogic.User;
+import com.example.tajappointments.UserLogic.UserService;
+
 import java.util.*;
 
 @RestController
 public class BusinessController {
 
+    private final UserService userService;
     //private static final Logger log = LoggerFactory.getLogger(BusinessController.class);
     private final BusinessService businessService;
 
-    public BusinessController(BusinessService businessService ) {
+    public BusinessController(BusinessService businessService, UserService userService ) {
         this.businessService = businessService;
+        this.userService = userService;
     }
 
     @PostMapping("/business")
@@ -33,6 +38,7 @@ public class BusinessController {
         String ownerId = form.getOwnerId();
 
         Business x = new Business();
+        
 
         x.setName(ownerName);
         x.setEmail(email);
@@ -40,6 +46,10 @@ public class BusinessController {
         x.setOwnerId(ownerId);
 
         businessService.create(x);
+
+        User y = userService.getUserById(UUID.fromString(ownerId));
+        
+        userService.addToBusinessId(UUID.fromString(y.getId()), x.getId());
 
         String res = "New Business Created - " + businessName;
 

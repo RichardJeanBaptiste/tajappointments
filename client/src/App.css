@@ -1,3 +1,5 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
 .lRoot {
   background: linear-gradient(135deg, #ffc9de 0%, #ff9ebb 100%);
   width: 100vw;

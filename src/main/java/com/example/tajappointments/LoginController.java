@@ -1,7 +1,5 @@
 package com.example.tajappointments;
 
-import com.example.tajappointments.BusinessLogic.Business;
-import com.example.tajappointments.BusinessLogic.BusinessForm;
 import com.example.tajappointments.BusinessLogic.BusinessService;
 import com.example.tajappointments.ClientLogic.Client;
 import com.example.tajappointments.ClientLogic.ClientForm;
@@ -15,6 +13,8 @@ import com.example.tajappointments.UserLogic.UserForm;
 import com.example.tajappointments.UserLogic.UserService;
 
 import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +23,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
@@ -73,10 +76,10 @@ public class LoginController {
         return guestService.create(guest);
     }
 
-    @PostMapping("/user")
-    public User create(@RequestBody User user) {
-        return userService.create(user);
-    }
+    // @PostMapping("/user")
+    // public User create(@RequestBody User user) {
+    //     return userService.create(user);
+    // }
 
 
     @PostMapping("/api/auth/login")
@@ -127,7 +130,6 @@ public class LoginController {
             return ResponseEntity.badRequest().body("Email already exists");
         }
     }
-
 
 
     @PostMapping("/api/new/client")
