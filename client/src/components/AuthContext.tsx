@@ -1,3 +1,4 @@
+import { jwtDecode } from "jwt-decode";
 import { createContext, useContext, useState, type ReactNode } from "react";
 
 interface AuthContextType {
@@ -6,13 +7,31 @@ interface AuthContextType {
     logout: () => void;
 }
 
+interface JwtPayload {
+    sub : string;
+    exp : number; 
+}
+
+function isTokenExpired(token: string) : boolean {
+    try {
+        const decoded = jwtDecode<JwtPayload>(token);
+        return decoded.exp * 1000 < Date.now();
+    } catch (error) {
+        return true;
+    }
+}
+
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
 
-    const [ token, setToken ] = useState<string | null>(
-        localStorage.getItem("token")
-    );
+    const [ token, setToken ] = useState<string | null>(() => {
+        const stored = localStorage.getItem("token");
+        if(stored && !isTokenExpired(stored)) return stored;
+
+        localStorage.removeItem("token");
+        return null;
+    });
 
     const login = (newToken: string) => {
         localStorage.setItem("token", newToken);
